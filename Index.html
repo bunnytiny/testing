@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List</title>
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            background-color: red;
+            height: 200px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            padding: 0 20px;
+        }
+        .header img {
+            height: 150px;
+        }
+        .header-text {
+            flex: 1;
+            text-align: center;
+        }
+/* Sub Header Styles */
+    .sub-header-text1 {
+        font-size: 30px;
+        font-weight: normal;
+        margin-top: 10px;
+        color: white;
+    }
+
+    .sub-header-text2 {
+        font-size: 35px;
+        font-weight: normal;
+        margin-top: 5px;
+        color: white;
+    }
+/* Navigation Bar */
+.nav-bar {
+    width: 100%;
+    background-color: #ff0000ff;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-around; /* Ensures equal spacing */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-bar a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    font-size: 26px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+.nav-bar a:hover {
+    transform: scale(1.6);
+    color: #ffffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-bar a {
+        display: block;
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+
+        /* Main Content */
+        .main-container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .side-container {
+            background: white;
+            width: 20%;
+            min-height: 400px;
+            margin: 0 5px;
+            padding: 0;
+            border-radius: 10px;
+            border: 2px solid black;
+            text-align: center;
+        }
+.container {
+    background: white;
+    width: 60%; /* Center container takes up the remaining space */
+    height: 360px; /* Set the height to 400px */
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid black; /* Added border */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+        .event {
+            display: flex;
+            border: 2px solid black;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .event .date-location {
+            background: red;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .event .date-location div {
+            padding: 5px 10px;
+            border-bottom: 2px solid white;
+        }
+        .event .date-location div:last-child {
+            border-bottom: none;
+        }
+        .event .details {
+            padding: 10px;
+            flex: 1;
+        }
+        .event .details .title {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .event .details .message {
+            color: black;
+            font-size: 18px;
+        }
+
+ /* Footer Styles */
+    footer {
+        background-color: #ff0000ff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* Visitor Count - Centered */
+    .visitor-count {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Divider line */
+    .footer-divider {
+        width: 80%;
+        border: 1px solid white;
+        margin: 20px 0;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+
+    /* Footer Links on Left */
+    .footer-links {
+        font-size: 16px;
+    }
+
+    .footer-links a {
+        color: white;
+        text-decoration: none;
+        margin-right: 20px;
+    }
+
+    .footer-links a:hover {
+        color: yellow;
+    }
+
+    /* Footer Text on Right */
+    .footer-text {
+        font-size: 16px;
+        text-align: right;
+    }
+    
+      /* Marquee Effect for Linked Events */
+    .marquee-container {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        animation: marquee 15s linear infinite;
+    }
+
+    .event {
+        min-width: 300px;
+        margin-right: 20px;
+        display: flex;
+        border: 2px solid black;
+        overflow: hidden;
+        border-radius: 5px;
+        background: white;
+    }
+
+    .event .date-location {
+        background: red;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .event .details {
+        padding: 10px;
+        flex: 1;
+    }
+
+    /* CSS Animation for Marquee */
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img src="https://lh6.googleusercontent.com/H5Gy5ALl4bfU2xSRCguk0a2T1tWb2uxEwFfMYC_oRs9jH8kW00TY03URjUpPVdF8m4ZoLrzIJw65_Q8ajKj0ggGYHEs3gxf632peZZUjIinzwQlvT8WuJ3AMt0aSHE_DqA=w1280" alt="Left Logo">
+            <div class="header-text">
+        ASSOCIATION OF SECRETARIAT ENGINEERS
+        <!-- Sub Header Text 1: Registered No -->
+        <div class="sub-header-text1">Registered No: 231/2023</div>
+        <!-- Sub Header Text 2: District Name -->
+        <div class="sub-header-text2">Dr. B.R. Ambedkar Konaseema District</div>
+    </div>
+        <img src="https://lh3.googleusercontent.com/S4MTrj4dNSrjREDTiLGAqrBvlfGEat6rdg_U4OFp-BhY17riDB1lPZWMIlQF6Xh8ZsWDMg0GlVBp1tkzfXMpB4c=w1280" alt="Right Logo">
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <a href="#">Home</a>
+        <a href="#">Estimates</a>
+        <a href="#">G.O's</a>
+        <a href="#">Circulars</a>
+        <a href="#">Materials</a>
+        <a href="#">News Articals</a>
+        <a href="#">Employee Corner</a>
+        <a href="#">About</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="side-container">Side Content</div>
+        <div class="container">
+            <!-- Events will be dynamically added here -->
+        </div>
+        <div class="side-container">Side Content</div>
+    </div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <!-- Visitor Count -->
+        <div class="visitor-count">
+            Visitors: <span id="visitorCount">Loading...</span>
+        </div>
+
+        <hr class="footer-divider"> <!-- Divider line between visitor count and footer links -->
+
+        <div class="footer-content">
+            <!-- Footer Links on Left -->
+            <div class="footer-links">
+                <a href="#contact">Contact</a> |
+                <a href="#terms">Terms and Conditions</a> |
+                <a href="#privacy">Privacy Policy</a><br>
+                <p>Designed by G.L.Bhagath Engineering Assistant.</p>
+            </div>
+
+            <!-- Footer Text on Right -->
+            <div class="footer-text">
+                © 2025 ASE Konaseema District. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("https://script.google.com/macros/s/AKfycbxsnAlS3ohAc_FkQZzl5qFxjS2xUS2Z2m0xwQB1dSMC8QgMgj47fCIQS9u85zcpcmF2aA/exec")
+                .then(response => response.json())
+                .then(data => {
+                    let container = document.querySelector(".container");
+                    container.innerHTML = ""; 
+
+                    data.forEach(event => {
+                        let formattedDate = formatDate(event.date);
+                        let eventHTML = `
+                            <div class="event">
+                                <div class="date-location">
+                                    <div>${formattedDate}</div>
+                                    <div>${event.location}</div>
+                                </div>
+                                <div class="details">
+                                    <div class="title">${event.title}</div>
+                                    <div class="message">${event.message}</div>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += eventHTML;
+                    });
+                });
+
+            function formatDate(dateString) {
+                let date = new Date(dateString);
+                return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth()+1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+            }
+
+            let visitorCount = localStorage.getItem("visitorCount") || 0;
+            visitorCount++;
+            localStorage.setItem("visitorCount", visitorCount);
+            document.getElementById("visitor-count").textContent = visitorCount;
+        });
+        
+           // Placeholder function for visitor count
+    let visitorCount = 100; // You can update this dynamically using a backend or API call
+    document.getElementById('visitorCount').innerText = visitorCount;
+    
+    
+    </script>
+</body>
+</html>
