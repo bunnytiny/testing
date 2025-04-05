@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Latest Posts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: white;
+            position: relative;
+        }
+
+        .image-container {
+            width: 60%;
+            max-width: 900px;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .image-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .image-date {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 70%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            object-fit: cover;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="image-container">
+    <div class="image-title" id="postTitle">Loading...</div>
+    <div class="image-date" id="postDate"></div>
+    <button class="nav-button prev" onclick="prevPost()">&#10094;</button>
+    <img id="postImage" src="" alt="Post Image">
+    <button class="nav-button next" onclick="nextPost()">&#10095;</button>
+</div>
+
+<script>
+    let posts = [];
+    let index = 0;
+    let interval;
+
+    function fetchPosts() {
+        fetch("fetch_posts.php")
+            .then(response => response.json())
+            .then(data => {
+                posts = data;
+                if (posts.length > 0) {
+                    showPost();
+                    startAutoSlide();
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
+    function formatDate(dateString) {
+        let date = new Date(dateString);
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        let year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
+    function showPost() {
+        if (posts.length > 0) {
+            let postImage = document.getElementById("postImage");
+            let postTitle = document.getElementById("postTitle");
+            let postDate = document.getElementById("postDate");
+            postImage.style.opacity = "0";
+            postTitle.style.opacity = "0";
+            postDate.style.opacity = "0";
+
+            setTimeout(() => {
+                postImage.src = posts[index].image;
+                postTitle.innerText = posts[index].title;
+                postDate.innerText = "📅 " + formatDate(posts[index].date);
+                postImage.style.opacity = "1";
+                postTitle.style.opacity = "1";
+                postDate.style.opacity = "1";
+            }, 500);
+        }
+    }
+
+    function nextPost() {
+        index = (index + 1) % posts.length;
+        showPost();
+    }
+
+    function prevPost() {
+        index = (index - 1 + posts.length) % posts.length;
+        showPost();
+    }
+
+    function startAutoSlide() {
+        clearInterval(interval);
+        interval = setInterval(nextPost, 10000);
+    }
+
+    fetchPosts();
+</script>
+
+</body>
+</html>

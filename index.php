@@ -225,7 +225,7 @@ $conn->close();
             padding-left: 10px;
             font-size: 20px;
             white-space: nowrap;
-            animation: marquee 60s linear infinite;
+            animation: marquee 30s linear infinite;
         }
 
         @keyframes marquee {
@@ -320,7 +320,7 @@ $conn->close();
         <div class="updates-content" id="updatesMarquee">
             <?php
             if (count($updates) > 0) {
-                echo implode(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp ', $updates);
+                echo implode(' &nbsp; &nbsp; &nbsp; &nbsp;', $updates);
             } else {
                 echo "No updates available.";
             }
